@@ -6,6 +6,7 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;
+    flex-direction: column;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -14,14 +15,35 @@ body{
     grid-template-columns: repeat(3,100px);
     grid-template-rows: repeat(3, 100px);
     gap: 30px;
+    margin-bottom: 20px;
+    
 }
 
-.celdas{
+.celda{
     background: khaki;
     border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2 ease;
+}
 
+/*BOTON REINICIAR*/
+#btnReiniciar{
+   background-color: white;
+    color: black;
+    border-radius: 3px;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: none;
+    box-shadow: 1px 1px 1px 1px rgba(136, 136, 136, 0.5);
+    cursor: pointer; 
+}
+
+
+#btnReiniciar:hover {
+    background-color: orangered;
+    color: #ffffff;
 }
