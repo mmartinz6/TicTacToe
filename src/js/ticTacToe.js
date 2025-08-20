@@ -2,6 +2,8 @@ const btnReiniciar = document.getElementById("btnReiniciar")
 const mensajeGanador = document.getElementById("mensajeGanador")
 const mensajeTurnoJugador = document.getElementById("mensajeTurnoJugador")
 
+const modoJuego = localStorage.getItem("modoJuego");
+
 const celdas = document.getElementsByClassName("celda");
 
 let turno = true;
