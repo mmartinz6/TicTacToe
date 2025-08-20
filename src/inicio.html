@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style/inicio.css">
 </head>
 <body>
-    <div>
-        <h1>Tic-Tac-Toe</h1>
-        <div>
+    <div class="contenedorPrincipal">
+        <h1 class="titulo">Tic-Tac-Toe</h1>
+        <div class="radios">
             <input type="radio" name="" id="rdUnJugador">
-            <label for="">Un jugador</label>
+            <label for="rdUnJugador" class="radioOpcion">Un jugador</label>
 
             <input type="radio" name="" id="rdDosJugadores">
-            <label for="">Dos jugadores</label>
+            <label for="rdDosJugadores" class="radioOpcion">Dos jugadores</label>
         </div>
 
         <button id="btnComenzar">Comenzar</button>
 
     </div>
+
+    <audio src="audio/minecraft_click.mp3" preload="auto" id="audioClick"></audio>
+
+   <!--  <video autoplay muted loop>
+        <source src="img/fondo.mp4" type="video/mp4">
+    </video> -->
     
     <script src="../src/js/inicio.js"></script>
 </body>

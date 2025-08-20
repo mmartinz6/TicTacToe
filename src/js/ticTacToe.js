@@ -4,7 +4,12 @@ const mensajeTurnoJugador = document.getElementById("mensajeTurnoJugador")
 
 const celdas = document.getElementsByClassName("celda");
 
-let turno = true
+let turno = true;
+
+let tablero = ["", "","","","","","","",""];
+let jugadasDisponibles = [];
+
+
 
 //Lista de combinaciones posibles para ganar
 const combinacionesGanadoras = [

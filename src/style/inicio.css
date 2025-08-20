@@ -1,0 +1,71 @@
+@import url('https://fonts.cdnfonts.com/css/minecraft-4');
+
+body{
+    font-family: 'Minecraft', sans-serif;
+    margin: 0;
+    color: #ffffff;
+    background-color: #000000;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.9)
+    ),url("../img/fondo.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.contenedorPrincipal{
+    text-align: center;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titulo{
+    font-size: 60px;
+}
+
+.radioOpcion{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.radios{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+input[type="radio"]{
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+
+#btnComenzar{
+    font-family: 'Minecraft', sans-serif;
+    font-size: 30px;
+    color: #ffffff;
+    background-color: #7a7a7a;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0 #000000;
+    padding: 8px 20px;
+    text-align: center;
+    cursor: pointer;
+    text-shadow: 1px 1px 0 #000000;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#btnComenzar:hover{
+    background-color: #8a8a8a;
+}
