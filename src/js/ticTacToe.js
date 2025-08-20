@@ -9,9 +9,7 @@ const celdas = document.getElementsByClassName("celda");
 let turno = true;
 
 let tablero = ["", "","","","","","","",""];
-let jugadasDisponibles = [];
-
-
+/* let jugadasDisponibles = []; */
 
 //Lista de combinaciones posibles para ganar
 const combinacionesGanadoras = [
@@ -28,28 +26,48 @@ const combinacionesGanadoras = [
 //Función para mostrar en pantalla el turno de cada jugador
 actualizarMensajeTurno()
 function actualizarMensajeTurno() {
-    if (turno) {
+    if (turno === true) {
         mensajeTurnoJugador.textContent = "JUGADOR 1"
     }else{
-        mensajeTurnoJugador.textContent = "JUGADOR 2"
+        if(modoJuego === "dosJugadores"){
+            mensajeTurnoJugador.textContent = "JUGADOR 2"
+        }else{
+             mensajeTurnoJugador.textContent = "COMPUTADORA"
+        }
     }
 }
 
 //Función para verificar ganador
+verificarGanador()
 function verificarGanador() {
     for (let index = 0; index < combinacionesGanadoras.length; index++) {
       const [a, b, c,]  = combinacionesGanadoras[index]
 
+
+      //verifica si las casillas son iguales 
       if (
         celdas[a].textContent !== "" &&
         celdas[a].textContent === celdas[b].textContent &&
         celdas[a].textContent === celdas[c].textContent
         ){
+            celdas[a].classList.add("ganador")
+            celdas[b].classList.add("ganador")
+            celdas[c].classList.add("ganador")
+
             return celdas[a].textContent;
         }
     }
 }
 
+
+function verificarEmpate() {
+    for (let index = 0; index < tablero.length; index++) {
+       if (tablero[index] === "") {
+        return false;
+       }  
+    }
+    return true
+}
 
 //
 for (let index = 0; index < celdas.length; index++) {
@@ -71,9 +89,15 @@ for (let index = 0; index < celdas.length; index++) {
 
             const ganador = verificarGanador();
             if (ganador) {
-                mensajeGanador.textContent = "GANO EL JUGADOR",ganador
+                mensajeGanador.textContent = "! FELICIDADES JUGADOR " + ganador +" !";
                 return;
             }
+
+            if(verificarEmpate()){
+                mensajeGanador.textContent = "¡EMPATE!";
+                return;
+            }
+
             turno = !turno;
 
             actualizarMensajeTurno()
@@ -88,7 +112,15 @@ btnReiniciar.addEventListener("click", function () {
         celdas[index].textContent = "";
     }
 
-    mensajeGanador.textContent = ""
+    mensajeGanador.textContent = "";
     turno = true
+    tablero = ["", "","","","","","","",""];
     actualizarMensajeTurno()
 })
+
+
+/////////////////////////////////
+//Función para jugar contra la computadora
+function movComputadora (){
+    let celdasDisponibles = [];
+}

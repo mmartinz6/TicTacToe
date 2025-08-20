@@ -60,10 +60,8 @@ input[type="radio"]{
     box-shadow: 2px 2px 0 #000000;
     padding: 8px 20px;
     text-align: center;
-    cursor: pointer;
     text-shadow: 1px 1px 0 #000000;
-    image-rendering: pixelated;
-    transition: transform 0.1s;
+    cursor: pointer;
 }
 
 #btnComenzar:hover{
