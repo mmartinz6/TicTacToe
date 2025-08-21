@@ -2,6 +2,7 @@ const btnReiniciar = document.getElementById("btnReiniciar")
 const mensajeGanador = document.getElementById("mensajeGanador")
 const mensajeTurnoJugador = document.getElementById("mensajeTurnoJugador")
 
+
 const modoJuego = localStorage.getItem("modoJuego");
 
 const celdas = document.getElementsByClassName("celda");
@@ -57,6 +58,7 @@ function verificarGanador() {
             return celdas[a].textContent;
         }
     }
+    return null
 }
 
 
@@ -66,7 +68,7 @@ function verificarEmpate() {
         return false;
        }  
     }
-    return true
+    return true;
 }
 
 //
@@ -86,6 +88,8 @@ for (let index = 0; index < celdas.length; index++) {
             }
 
             element.textContent = jugadorActual;
+
+            tablero[index] = jugadorActual;
 
             const ganador = verificarGanador();
             if (ganador) {
@@ -110,6 +114,7 @@ for (let index = 0; index < celdas.length; index++) {
 btnReiniciar.addEventListener("click", function () {
     for (let index = 0; index < celdas.length; index++) {
         celdas[index].textContent = "";
+        celdas[index].classList.remove("ganador");
     }
 
     mensajeGanador.textContent = "";
@@ -123,4 +128,15 @@ btnReiniciar.addEventListener("click", function () {
 //Función para jugar contra la computadora
 function movComputadora (){
     let celdasDisponibles = [];
+    
+    for (let index = 0; index < tablero.length; index++) {
+        if (tablero[index] === "") {
+            celdasDisponibles.push(index);
+        }
+    }
+
+
+    if (!celdasDisponibles.length) {
+        return;
+    }
 }

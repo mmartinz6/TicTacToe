@@ -19,5 +19,5 @@ btnComenzar.addEventListener("click", function() {
         return;
     }
 
-    window.location.href = "ticTacToe.html"
+    window.location.href = "ticTacToe.html"; //Redirige a la pantalla de juego
 });
