@@ -9,6 +9,8 @@ const celdas = document.getElementsByClassName("celda");
 
 let turno = true;
 
+let juegoActivo = true;
+
 let tablero = ["", "","","","","","","",""];
 /* let jugadasDisponibles = []; */
 
@@ -77,6 +79,8 @@ for (let index = 0; index < celdas.length; index++) {
     console.log(index);
 
     celdas[index].addEventListener("click", function() {
+        if (!juegoActivo) return;
+
         if (element.textContent === "") {
             let jugadorActual;
 
@@ -94,19 +98,25 @@ for (let index = 0; index < celdas.length; index++) {
             const ganador = verificarGanador();
             if (ganador) {
                 mensajeGanador.textContent = "! FELICIDADES JUGADOR " + ganador +" !";
+                juegoActivo = false;
                 return;
             }
 
             if(verificarEmpate()){
                 mensajeGanador.textContent = "¡EMPATE!";
+                juegoActivo = false;
                 return;
             }
 
             turno = !turno;
 
             actualizarMensajeTurno()
+
+            if (!turno && modoJuego ==="unJugador" ) {
+                setTimeout(movComputadora,1000);
+            }
         }
-    })
+    });
 }
 
 
@@ -135,8 +145,30 @@ function movComputadora (){
         }
     }
 
-
     if (!celdasDisponibles.length) {
         return;
     }
+
+    let aleatorio = Math.floor(Math.random() * celdasDisponibles.length);
+    let eleccion = celdasDisponibles[aleatorio]
+
+    celdas[eleccion].textContent = "O";
+    tablero[eleccion] = "O";
+
+    const ganador = verificarGanador();
+            if (ganador) {
+                mensajeGanador.textContent = "! FELICIDADES JUGADOR " + ganador +" !";
+                juegoActivo = false;
+                return;
+            }
+
+            if(verificarEmpate()){
+                mensajeGanador.textContent = "¡EMPATE!";
+                juegoActivo = false;
+                return;
+            }
+
+            turno = !turno;
+
+            actualizarMensajeTurno()
 }

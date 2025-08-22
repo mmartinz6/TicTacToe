@@ -1,8 +1,12 @@
 @import url('https://fonts.cdnfonts.com/css/minecraft-4');
+@import url('https://fonts.cdnfonts.com/css/minecraftia');
 
 body{
-    background-image: url(../img/);
-    background-color: sandybrown;
+    background-image: url(../img/fondo2.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: green;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,12 +16,39 @@ body{
     font-family: 'Minecraft', sans-serif;
 }
 
+.contenedorFondoGris{
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #C2C2C2;
+    font-family: 'Minecraftia', sans-serif;
+}
+
+.flecha img{
+    width: 100px;
+    height: 110px;
+}
+
+
+.mesaCrafteo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;                                     
+}
+
 /*MENSAJE TURNO DEL JUGADOR*/
 #mensajeTurnoJugador{
     font-weight: bold;
     color: #000000;
-    font-size: 35px;
+    font-size: 25px;
     margin-bottom: 20px;
+    
     
 }
 
@@ -25,22 +56,25 @@ body{
     display: grid;
     grid-template-columns: repeat(3,100px);
     grid-template-rows: repeat(3, 100px);
-    gap: 30px;
-    margin-bottom: 20px;
+    gap: 4px;
 }
 
 .celda{
-    background: khaki;
-    color: orangered;
-    border-radius: 15px;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #8A8A8A;
     font-size: 14px;
+    border: 2px solid #000000;
     cursor: pointer;
     transition: all 0.5 ease;
     font-size: 40px;
     font-weight: bold;
+}
+
+.celda:hover{
+    background-color: #888;
 }
 
 .contenedorMensaje{

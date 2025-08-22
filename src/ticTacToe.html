@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +7,83 @@
     <link rel="stylesheet" href="style/ticTacToe.css">
 </head>
 <body>
-    <!-- <h1>Tic-Tac-Toe</h1> -->
-    <div id="mensajeTurnoJugador"></div>
+    <div class="contenedorFondoGris">
 
-    <div class="contenedorCeldas">
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-        <div class="celda"></div>
-    </div>
+        <!-- Modal de selección de jugadores -->
+        <div id="modalJugadores" class="modal">
+            <div class="modal-contenido">
+                <h2>Configura tu partida</h2>
 
-    <div class="contenedorMensaje">
-        <div id="mensajeGanador"></div>
-        <button id="btnReiniciar">Reiniciar</button>
+                <!-- Jugador 1 -->
+                <div class="jugador">
+                    <label for="nombreJugador1">Nombre del Jugador 1:</label>
+                    <input type="text" id="nombreJugador1" placeholder="Nombre" required>
+
+                    <p>Elige tu ficha:</p>
+                    <div class="opciones-fichas">
+                        <button id="fichaJ1_1" class="btn-ficha" data-ficha="img/Steve.png">
+                            <img src="img/Steve.png" alt="Steve">
+                        </button>
+                        <button id="fichaJ1_2" class="btn-ficha" data-ficha="img/Skeleton.png">
+                            <img src="img/Skeleton.png" alt="Skeleton">
+                        </button>
+                        <button id="fichaJ1_3" class="btn-ficha" data-ficha="img/pico.svg">
+                            <img src="img/pico.svg" alt="Pico">
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Jugador 2 -->
+                <div class="jugador">
+                    <label for="nombreJugador2">Nombre del Jugador 2:</label>
+                    <input type="text" id="nombreJugador2" placeholder="Nombre" required>
+
+                    <p>Elige tu ficha:</p>
+                    <div class="opciones-fichas">
+                        <button id="fichaJ2_1" class="btn-ficha" data-ficha="img/cerdo.svg">
+                            <img src="img/cerdo.svg" alt="Cerdo">
+                        </button>
+                        <button id="fichaJ2_2" class="btn-ficha" data-ficha="img/creeper.png">
+                            <img src="img/creeper.png" alt="Creeper">
+                        </button>
+                        <button id="fichaJ2_3" class="btn-ficha" data-ficha="img/hacha.svg">
+                            <img src="img/hacha.svg" alt="Hacha">
+                        </button>
+                    </div>
+                </div>
+
+                <button id="btnComenzar" class="btn-comenzar">¡Comenzar partida!</button>
+            </div>
+        </div>
+
+        <div id="mensajeTurnoJugador"></div>
+
+        <div class="mesaCrafteo">
+            <div class="contenedorCeldas">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+
+            <div class="flecha">
+                <img src="img/arrow.svg" alt="">
+            </div>
+        </div>
+        
+        <div class="contenedorMensaje">
+            <div id="mensajeGanador"></div>
+            <button id="btnReiniciar">Reiniciar</button>
+        </div>
     </div>
+    
     <script src="js/ticTacToe.js"></script>
 </body>
 </html>
