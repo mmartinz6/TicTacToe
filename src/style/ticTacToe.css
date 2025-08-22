@@ -33,7 +33,6 @@ body{
     height: 110px;
 }
 
-
 .mesaCrafteo{
     display: flex;
     align-items: center;
@@ -111,4 +110,99 @@ body{
 .ganador{
     background-color: #7a7a7a;
     color: #000000;
+}
+
+/*MODAL DE VENTANA EMERGENTE PARA ELEGIR GANADOR*/
+.modal { 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.modal h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.btn-ficha {
+    background: none;
+    border: 2px solid #ccc;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.2s ease, border-color 0.3s ease;
+}
+
+.btn-ficha:hover {
+    border-color: #333;
+    transform: scale(1.1);
+}
+
+.btn-ficha.seleccionada {
+    border-color: green;
+    transform: scale(1.2);
+}
+
+.btn-ficha img {
+    width: 50px;
+    height: 50px;
+}
+
+#tablero {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    justify-content: center;
+}
+
+.celda {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    font-size: 50px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+     
+#btnComenzar{
+    font-family: 'Minecraft', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #7a7a7a;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0 #000000;
+    padding: 8px 20px;
+    text-align: center;
+    text-shadow: 1px 1px 0 #000000;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+#btnComenzar:hover{
+    background-color: #8a8a8a;
+}
+
+.labelNombre{
+    font-family: 'Minecraftia', sans-serif;
+    margin-top: 5px;
 }

@@ -133,7 +133,6 @@ btnReiniciar.addEventListener("click", function () {
     actualizarMensajeTurno()
 })
 
-
 /////////////////////////////////
 //Función para jugar contra la computadora
 function movComputadora (){
@@ -172,3 +171,6 @@ function movComputadora (){
 
             actualizarMensajeTurno()
 }
+
+/*MODAL VENTANA EMERGENTE*/ 
+
