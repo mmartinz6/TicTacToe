@@ -187,6 +187,8 @@ body{
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    box-sizing: border-box;
+    padding: 20px;
 }
 
 .modal-contenido {
@@ -266,3 +268,5 @@ body{
     object-fit: contain;
     pointer-events: none;
 }
+
+
