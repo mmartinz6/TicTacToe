@@ -109,7 +109,7 @@ if (modoJuego === "unJugador" || modoJuego === "dosJugadores") {
   if (modoJuego === "unJugador") {
     document.getElementById("jugador2").style.display = "none";
   } else {
-    document.getElementById("jugador2").style.display = "flex";
+    document.getElementById("jugador2").style.display = "block";
   }
 }
 
@@ -320,6 +320,6 @@ function actualizarEstadisticas() {
   document.getElementById("victoriasJugador1").textContent = estadisticasJuego.victoriasJugador1;
 
   document.getElementById("victoriasJugador2").textContent = estadisticasJuego.victoriasJugador2;
-  
+
   document.getElementById("empates").textContent = estadisticasJuego.empates;
 }
