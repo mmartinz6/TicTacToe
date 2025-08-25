@@ -21,6 +21,9 @@ let tablero = ["","","","","","","","",""];
 let fichaJugador1 = null;
 let fichaJugador2 = null;
 
+const nombreJugador1 = document.getElementById("nombreJugador1");
+const nombreJugador2 = document.getElementById("nombreJugador2");
+
 //Lista de combinaciones posibles para ganar
 const combinacionesGanadoras = [
     [0, 1, 2], //h
@@ -37,10 +40,10 @@ const combinacionesGanadoras = [
 actualizarMensajeTurno()
 function actualizarMensajeTurno() {
     if (turno === true) {
-        mensajeTurnoJugador.textContent = "JUGADOR 1"
+        mensajeTurnoJugador.textContent = "JUGADOR " + nombreJugador1.value
     }else{
         if(modoJuego === "dosJugadores"){
-            mensajeTurnoJugador.textContent = "JUGADOR 2"
+            mensajeTurnoJugador.textContent = "JUGADOR " + nombreJugador2.value
         }else{
              mensajeTurnoJugador.textContent = "COMPUTADORA"
         }
@@ -56,15 +59,15 @@ function verificarGanador() {
 
       //verifica si las casillas son iguales 
       if (
-        celdas[a].textContent !== "" &&
-        celdas[a].textContent === celdas[b].textContent &&
-        celdas[a].textContent === celdas[c].textContent
+        tablero[a] !== "" &&
+        tablero[a] === tablero[b] &&
+        tablero[a] === tablero[c]
         ){
             celdas[a].classList.add("ganador")
             celdas[b].classList.add("ganador")
             celdas[c].classList.add("ganador")
 
-            return celdas[a].textContent;
+            return tablero[a];
         }
     }
     return null
@@ -80,48 +83,109 @@ function verificarEmpate() {
     return true;
 }
 
+//ESTADISTICA DE JUGADORES
+// Objeto para estadísticas
+let estadisticasJuego = JSON.parse(localStorage.getItem("estadisticasJuego")) || {
+    victoriasJugador1: 0,
+    victoriasJugador2: 0,
+    empates: 0
+};
+
+// Función para incrementar contadores usando for
+function incrementarContadorResultado(resultado) {
+    let claves = ["victoriasJugador1", "victoriasJugador2", "empates"];
+    let resultados = ["Jugador1", "Jugador2", "Empate"];
+    
+    for (let index = 0; index < resultados.length; index++) {
+        if (resultado === resultados[index]) {
+            estadisticasJuego[claves[index]] +=1;
+        }
+    }
+
+    actualizarEstadisticas();
+}
+
 //
+if(modoJuego === "unJugador") {
+    modalJugadores.style.display = "flex";
+
+    document.getElementById("jugador2").style.display = "none";
+
+    btnComenzar.addEventListener("click", function(){
+
+        if(nombreJugador1.value.trim() === "" || !fichaJugador1){
+            alert("Escribe tu nombre y elije la ficha."); 
+            return;
+        }
+        // Selección aleatoria de ficha computadora
+        let disponibles = [];
+        for(let index = 3; index < btnFicha.length; index++){
+            let fichaBot = btnFicha[index].getAttribute("data-ficha");
+            if(fichaBot !== fichaJugador1) disponibles.push(fichaBot);
+        }
+        fichaJugador2 = disponibles[Math.floor(Math.random()*disponibles.length)];
+        nombreJugador2.value = "COMPUTADORA";
+
+        modalJugadores.style.display = "none";
+        actualizarMensajeTurno();
+    });
+}
+
+//CLICK EN LAS CELDAS
 for (let index = 0; index < celdas.length; index++) {
     const element = celdas[index];
-    console.log(index);
-
+    
     celdas[index].addEventListener("click", function() {
-        if (!juegoActivo) return;
+        if (!juegoActivo){
+            return;
+        } 
 
-        if (element.textContent === "") {
-            let jugadorActual;
+        if (tablero[index] !== "") {
+            return;
+        }
 
-            if (turno) {
-                jugadorActual = "X"
+        let jugadorActual;
+        
+        if (turno) {
+            jugadorActual = fichaJugador1;
+        } else{
+            jugadorActual = fichaJugador2;
+        }
+        
+        element.innerHTML = "<img src='" + jugadorActual + "' alt='Ficha' class='ficha-img'>";
+        tablero[index] = jugadorActual;
 
-            } else{
-                jugadorActual = "O"
+        const ganador = verificarGanador();
+        if (ganador) {
+            let nombreGanador;
+            let resultado;
+            
+            if(turno){
+                nombreGanador = nombreJugador1.value;
+                resultado = "Jugador1";
+            } else {
+                nombreGanador = nombreJugador2.value;
+                resultado = "Jugador2";
             }
+            mensajeGanador.textContent = "! FELICIDADES JUGADOR: " + nombreGanador +" !";
+            juegoActivo = false;
+            incrementarContadorResultado(resultado);
+            return;
+        }
+        
+        if(verificarEmpate()){
+            mensajeGanador.textContent = "¡EMPATE!";
+            juegoActivo = false;
+            incrementarContadorResultado("Empate");
+            return;
+        }
+        
+        turno = !turno;
 
-            element.textContent = jugadorActual;
+        actualizarMensajeTurno()
 
-            tablero[index] = jugadorActual;
-
-            const ganador = verificarGanador();
-            if (ganador) {
-                mensajeGanador.textContent = "! FELICIDADES JUGADOR " + ganador +" !";
-                juegoActivo = false;
-                return;
-            }
-
-            if(verificarEmpate()){
-                mensajeGanador.textContent = "¡EMPATE!";
-                juegoActivo = false;
-                return;
-            }
-
-            turno = !turno;
-
-            actualizarMensajeTurno()
-
-            if (!turno && modoJuego ==="unJugador" ) {
-                setTimeout(movComputadora,1000);
-            }
+        if (!turno && modoJuego ==="unJugador" ) {
+            setTimeout(movComputadora,1000);
         }
     });
 }
@@ -130,19 +194,22 @@ for (let index = 0; index < celdas.length; index++) {
 //Botón reinicia el tablero del juego
 btnReiniciar.addEventListener("click", function () {
     for (let index = 0; index < celdas.length; index++) {
-        celdas[index].textContent = "";
+        celdas[index].innerHTML = "";
         celdas[index].classList.remove("ganador");
     }
 
     mensajeGanador.textContent = "";
     turno = true
     tablero = ["", "","","","","","","",""];
+    juegoActivo = true
     actualizarMensajeTurno()
 })
 
 /////////////////////////////////
 //Función para jugar contra la computadora
 function movComputadora (){
+    if(!juegoActivo)return;
+
     let celdasDisponibles = [];
     
     for (let index = 0; index < tablero.length; index++) {
@@ -151,19 +218,19 @@ function movComputadora (){
         }
     }
 
-    if (!celdasDisponibles.length) {
+    if (!celdasDisponibles.length === 0) {
         return;
     }
 
     let aleatorio = Math.floor(Math.random() * celdasDisponibles.length);
     let eleccion = celdasDisponibles[aleatorio]
 
-    celdas[eleccion].textContent = "O";
-    tablero[eleccion] = "O";
+    tablero[eleccion] = fichaJugador2;
+    celdas[eleccion].innerHTML = "<img src='"+fichaJugador2+"' class='ficha-img'>";
 
     const ganador = verificarGanador();
             if (ganador) {
-                mensajeGanador.textContent = "! FELICIDADES JUGADOR " + ganador +" !";
+                mensajeGanador.textContent = "! FELICIDADES " + nombreJugador2.value +" !"; 
                 juegoActivo = false;
                 return;
             }
@@ -182,10 +249,11 @@ function movComputadora (){
 //////////////////////////////////////////77
 /*MODAL VENTANA EMERGENTE PARA DOS JUGADORES*/ 
 // Mostrar u ocultar modal al inicio
-if (modoJuego === "dosJugadores") {
-    modalJugadores.style.display = "flex";
+modalJugadores.style.display = "flex"; // siempre mostrar el modal
+if(modoJuego === "unJugador"){
+    document.getElementById("jugador2").style.display = "none";
 } else {
-    modalJugadores.style.display = "none";
+    document.getElementById("jugador2").style.display = "flex";
 }
 
 // Selección de fichas
@@ -208,9 +276,6 @@ for (let index = 0; index < btnFicha.length; index++) {
 }
 
 
-const nombreJugador1 = document.getElementById("nombreJugador1");
-const nombreJugador2 = document.getElementById("nombreJugador2");
-
 btnComenzar.addEventListener("click", function () {
     // Validar que los nombres estén escritos y que haya eligido la ficha
     if (nombreJugador1.value.trim() === "" || nombreJugador2.value.trim() === "") {
@@ -230,5 +295,42 @@ btnComenzar.addEventListener("click", function () {
 
     // Ocultar modal
     modalJugadores.style.display = "none";
+    actualizarMensajeTurno();
 });
+
+
+///////////////////////////////77
+//Modal del boton estadidticas
+const btnEstadistica = document.getElementById("btnEstadistica");
+const modalEstadisticas = document.getElementById("modalEstadisticas");
+const btnCerrarEstadis = document.getElementById("btnCerrarEstadis");
+const btnReiniciarEstadis = document.getElementById("btnReiniciarEstadis");
+
+btnEstadistica.addEventListener("click", function() {
+    actualizarEstadisticas();
+    modalEstadisticas.style.display = "flex";
+});
+
+btnCerrarEstadis.addEventListener("click", function(){
+    modalEstadisticas.style.display = "none";
+});
+
+btnReiniciarEstadis.addEventListener("click", function(){
+    estadisticasJuego = { victoriasJugador1: 0, victoriasJugador2: 0, empates: 0 };
+    actualizarEstadisticas();
+});
+
+function actualizarEstadisticas() {
+    localStorage.setItem("estadisticasJuego", JSON.stringify(estadisticasJuego));
+
+    // Actualizar el contenido del modal
+    document.getElementById("victoriasJugador1").textContent = estadisticasJuego.victoriasJugador1;
+    document.getElementById("victoriasJugador2").textContent = estadisticasJuego.victoriasJugador2;
+    document.getElementById("empates").textContent = estadisticasJuego.empates;
+}
+
+
+
+
+
 

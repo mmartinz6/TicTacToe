@@ -36,7 +36,7 @@
                 <hr>
 
                 <!-- Jugador 2 -->
-                <div class="jugador">
+                <div class="jugador" id="jugador2">
                     <label for="nombreJugador2">Nombre del Jugador 2:</label>
                     <input type="text" class="labelNombre" id="nombreJugador2" placeholder="Nombre" required>
 
@@ -59,6 +59,21 @@
         </div>
 
         <div id="mensajeTurnoJugador"></div>
+
+        <!-- Modal botón de estadisticas de juego -->
+         <button id="btnEstadistica" title="Ver estadísticas"></button>
+         <div id="modalEstadisticas" class="modal" style="display: none;">
+            <div class="modal-contenido">
+                <h2>Estadísticas del juego</h2>
+                <div class="estadisticas">
+                    <p>><strong>Victorias Jugador 1: <span id="victoriasJugador1">0</span></strong></p>
+                    <p>><strong>Victorias Jugador 2: <span id="victoriasJugador2">0</span></strong></p>
+                    <p>><strong>Empates: <span id="empates">0</span></strong></p>
+                </div>
+                <button id="btnReiniciarEstadis" class="btnStats">Reiniciar</button>
+                <button id="btnCerrarEstadis" class="btnStats">Cerrar</button>
+            </div>
+         </div>
 
         <div class="mesaCrafteo">
             <div class="contenedorCeldas">
