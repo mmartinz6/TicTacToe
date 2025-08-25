@@ -1,18 +1,25 @@
+//Const obtiene modo de juego
+const modoJuego = localStorage.getItem("modoJuego");
+
 const btnReiniciar = document.getElementById("btnReiniciar")
 const mensajeGanador = document.getElementById("mensajeGanador")
 const mensajeTurnoJugador = document.getElementById("mensajeTurnoJugador")
 
-
-const modoJuego = localStorage.getItem("modoJuego");
-
 const celdas = document.getElementsByClassName("celda");
+
+//Constantes para el modal que solicita nombre y ficha de juego al usuario 
+const modalJugadores = document.getElementById("modalJugadores")
+const btnComenzar = document.getElementById("btnComenzar")
+const btnFicha = document.getElementsByClassName("btnFicha")
 
 let turno = true;
 
 let juegoActivo = true;
 
-let tablero = ["", "","","","","","","",""];
-/* let jugadasDisponibles = []; */
+let tablero = ["","","","","","","","",""];
+
+let fichaJugador1 = null;
+let fichaJugador2 = null;
 
 //Lista de combinaciones posibles para ganar
 const combinacionesGanadoras = [
@@ -63,7 +70,7 @@ function verificarGanador() {
     return null
 }
 
-
+//Función para verificar si hay empate
 function verificarEmpate() {
     for (let index = 0; index < tablero.length; index++) {
        if (tablero[index] === "") {
@@ -172,5 +179,56 @@ function movComputadora (){
             actualizarMensajeTurno()
 }
 
-/*MODAL VENTANA EMERGENTE*/ 
+//////////////////////////////////////////77
+/*MODAL VENTANA EMERGENTE PARA DOS JUGADORES*/ 
+// Mostrar u ocultar modal al inicio
+if (modoJuego === "dosJugadores") {
+    modalJugadores.style.display = "flex";
+} else {
+    modalJugadores.style.display = "none";
+}
+
+// Selección de fichas
+for (let index = 0; index < btnFicha.length; index++) {
+    
+    btnFicha[index].addEventListener("click", function () {
+        for (let j = 0; j < btnFicha.length; j++) {
+            btnFicha[j].classList.remove("seleccionado");
+        }
+
+        btnFicha[index].classList.add("seleccionado");
+
+        const ficha = btnFicha[index].getAttribute("data-ficha");
+        if (index < 3) {
+            fichaJugador1 = ficha;
+        } else {
+            fichaJugador2 = ficha;
+        }
+    });
+}
+
+
+const nombreJugador1 = document.getElementById("nombreJugador1");
+const nombreJugador2 = document.getElementById("nombreJugador2");
+
+btnComenzar.addEventListener("click", function () {
+    // Validar que los nombres estén escritos y que haya eligido la ficha
+    if (nombreJugador1.value.trim() === "" || nombreJugador2.value.trim() === "") {
+        alert("Por favor, escribe los nombres de ambos jugadores.");
+        return;
+    }
+
+    if (!fichaJugador1 || !fichaJugador2) {
+        alert("Por favor, selecciona las fichas de ambos jugadores.");
+        return;
+    }
+
+    localStorage.setItem("nombreJugador1", nombreJugador1.value);
+    localStorage.setItem("nombreJugador2", nombreJugador2.value);
+    localStorage.setItem("fichaJugador1", fichaJugador1);
+    localStorage.setItem("fichaJugador2", fichaJugador2);
+
+    // Ocultar modal
+    modalJugadores.style.display = "none";
+});
 

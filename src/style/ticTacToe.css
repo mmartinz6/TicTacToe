@@ -6,7 +6,6 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-color: green;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +137,7 @@ body{
     font-size: 20px;
 }
 
-.btn-ficha {
+.btnFicha {
     background: none;
     border: 2px solid #ccc;
     margin: 10px;
@@ -148,17 +147,17 @@ body{
     transition: transform 0.2s ease, border-color 0.3s ease;
 }
 
-.btn-ficha:hover {
+.btnFicha:hover {
     border-color: #333;
     transform: scale(1.1);
 }
 
-.btn-ficha.seleccionada {
+.btnFicha.seleccionada {
     border-color: green;
     transform: scale(1.2);
 }
 
-.btn-ficha img {
+.btnFicha img {
     width: 50px;
     height: 50px;
 }
